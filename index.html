@@ -1,10 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>もらい忘れ診断AI</title>
+<style>
+body{
+font-family:sans-serif;
+max-width:700px;
+margin:auto;
+padding:20px;
+}
+h1{
+text-align:center;
+}
+label{
+display:block;
+margin-top:15px;
+}
+select{
+width:100%;
+padding:10px;
+margin-top:5px;
+}
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+font-size:18px;
+}
+#result{
+margin-top:30px;
+padding:20px;
+background:#f3f3f3;
+display:none;
+}
+</style>
 </head>
 <body>
+
 <h1>もらい忘れ診断AI</h1>
-<p>公開テスト成功</p>
+
+<label>年齢</label>
+<select id="age">
+<option value="20">20代</option>
+<option value="30">30代</option>
+<option value="40">40代</option>
+<option value="50">50代以上</option>
+</select>
+
+<label>結婚していますか？</label>
+<select id="married">
+<option value="0">いいえ</option>
+<option value="1">はい</option>
+</select>
+
+<label>子供はいますか？</label>
+<select id="children">
+<option value="0">いない</option>
+<option value="1">いる</option>
+</select>
+
+<label>NISAを利用していますか？</label>
+<select id="nisa">
+<option value="0">利用していない</option>
+<option value="1">利用している</option>
+</select>
+
+<button onclick="checkMoney()">
+診断する
+</button>
+
+<div id="result"></div>
+
+<script>
+function checkMoney(){
+
+let score = 0;
+
+if(document.getElementById('married').value=="1"){
+score += 30000;
+}
+
+if(document.getElementById('children').value=="1"){
+score += 50000;
+}
+
+if(document.getElementById('nisa').value=="0"){
+score += 40000;
+}
+
+document.getElementById('result').style.display='block';
+
+document.getElementById('result').innerHTML=
+"<h2>診断結果</h2>"+
+"<p>見逃している可能性のある金額</p>"+
+"<h1>"+score.toLocaleString()+"円/年</h1>"+
+"<p>医療費控除・自治体制度・NISAなどを確認する価値があります。</p>";
+}
+</script>
+
 </body>
 </html>
